@@ -1,0 +1,147 @@
+{
+  "personal": {
+    "name": "Irfan Fahrurohman",
+    "roles": [
+      "UI/UX Designer",
+      "DevOps Engineer"
+    ],
+    "bio": "Designing seamless experiences & scaling systems with precision.",
+    "intro": "I bridge the gap between intuitive design and robust infrastructure, ensuring every pixel-perfect interface is backed by a scalable, reliable system.",
+    "email": "contact@pann.my.id",
+    "location": "Semarang, Jawa Tengah",
+    "who_is_irfan": "UI/UX Designer and DevOps Engineer who focuses on building clean, user-centered interfaces alongside reliable and scalable systems.",
+    "terminal": {
+      "user": "irfan",
+      "hostname": "portfolio",
+      "shell": "zsh",
+      "commands": [
+        {
+          "input": "cat location.txt",
+          "output": "Semarang, Jawa Tengah 🌏"
+        },
+        {
+          "input": "cat skills.json | jq '.advanced'",
+          "output": "[\"Figma\", \"React\", \"Tailwind\"]"
+        },
+        {
+          "input": "echo $CURRENT_GOAL",
+          "output": "Building standardizing systems."
+        }
+      ]
+    },
+    "social": {
+      "linkedin": "https://www.linkedin.com/in/irfanfahrurohmann/",
+      "github": "https://github.com/irfanroman",
+      "dribbble": "https://dribbble.com/nouudesign"
+    }
+  },
+  "career_journey": [
+    {
+      "id": "current",
+      "type": "Career",
+      "label": "Hosting.com",
+      "period": "2025 - Present",
+      "description": "Hosting Support Engineer ensuring uptime and customer success."
+    },
+    {
+      "id": "intern",
+      "type": "Internship",
+      "label": "Remote Worker Indonesia",
+      "period": "2024 - 2025",
+      "description": "Gaining real-world experience in remote collaboration and design."
+    },
+    {
+      "id": "smk",
+      "type": "Education",
+      "label": "SMK IDN Boarding School Solo",
+      "period": "2022 - 2025",
+      "description": "Specializing in technical foundations and design thinking."
+    },
+    {
+      "id": "smp",
+      "type": "Education",
+      "label": "SMP Al Izzah Batu",
+      "period": "2019 – 2022",
+      "description": "Foundational education in a holistic learning environment."
+    }
+  ],
+  "experience_projects": [
+    {
+      "id": "aisba",
+      "title": "AISBA School Website",
+      "description": "An integrated school website platform designed to support digital academic needs, school profiles, and online services for seamless communication."
+    },
+    {
+      "id": "rwid",
+      "title": "UI/UX Designer on RWID",
+      "description": "Crafting intuitive and user-centered design systems for the Remote Worker Indonesia platform."
+    }
+  ],
+  "tech_stack": [
+    {
+      "name": "Figma",
+      "icon": "figma"
+    },
+    {
+      "name": "Vercel",
+      "icon": "vercel"
+    },
+    {
+      "name": "Tailwind",
+      "icon": "tailwind"
+    },
+    {
+      "name": "React",
+      "icon": "react"
+    },
+    {
+      "name": "Docker",
+      "icon": "docker"
+    },
+    {
+      "name": "Cpanel",
+      "icon": "cpanel"
+    },
+    {
+      "name": "GitHub",
+      "icon": "github"
+    },
+    {
+      "name": "Bootstrap",
+      "icon": "bootstrap"
+    },
+    {
+      "name": "Laravel",
+      "icon": "laravel"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "title": "AISBA School Website",
+      "category": "Fullstack Dev",
+      "description": "An integrated school platform providing academic info, school profiles, and online services.",
+      "image": "https://aisba.sch.id/frontend/assets/image/hero_bg.png",
+      "size": "large",
+      "link": "https://aisba.sch.id"
+    },
+    {
+      "id": 2,
+      "title": "Dashboard (pann.my.id)",
+      "category": "Utilities",
+      "description": "A comprehensive administrative dashboard for managing and monitoring system operations.",
+      "image": "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=1000",
+      "size": "medium",
+      "link": "https://dashboard.pann.my.id"
+    },
+    {
+      "id": 3,
+      "title": "Travel App",
+      "category": "UI/UX Designer",
+      "description": "Intuitive and engaging user interface design for a modern travel and exploration application.",
+      "image": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1000",
+      "size": "medium",
+      "link": ""
+    }
+  ]
+}

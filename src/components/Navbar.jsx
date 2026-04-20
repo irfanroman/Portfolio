@@ -1,0 +1,53 @@
+import React, { useState } from "react";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+
+const Navbar = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (latest > 100) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  });
+
+  const links = [
+    { name: "About", href: "#about" },
+    { name: "Projects", href: "#projects" },
+    { name: "Blog", href: "#blog" },
+    { name: "Stack", href: "#stack" },
+    { name: "Contact", href: "#contact" },
+  ];
+
+  return (
+    <motion.nav
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ 
+        y: isVisible ? 0 : -100, 
+        opacity: isVisible ? 1 : 0 
+      }}
+      transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+      className="fixed top-8 left-1/2 -translate-x-1/2 z-50 pointer-events-none"
+    >
+      <div className="glass-premium px-10 py-4 rounded-full flex gap-12 items-center pointer-events-auto border border-slate-200/50 shadow-liquid">
+        {links.map((link) => (
+          <a
+            key={link.name}
+            href={link.href}
+            className="text-[11px] font-bold text-slate-500 hover:text-cyan-600 transition-liquid uppercase tracking-[0.25em]"
+          >
+            {link.name}
+          </a>
+        ))}
+        <div className="w-px h-4 bg-slate-200" />
+        <button className="text-[11px] font-bold text-white bg-slate-900 px-4 py-2 rounded-full hover:bg-cyan-500 transition-liquid uppercase tracking-[0.2em] shadow-sm">
+          Menu
+        </button>
+      </div>
+    </motion.nav>
+  );
+};
+
+export default Navbar;

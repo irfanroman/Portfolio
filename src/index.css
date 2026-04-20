@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+/* Typography Imports */
+@import "@fontsource/outfit/400.css";
+@import "@fontsource/outfit/600.css";
+@import "@fontsource/outfit/700.css";
+@import "@fontsource/plus-jakarta-sans/400.css";
+@import "@fontsource/plus-jakarta-sans/500.css";
+@import "@fontsource/plus-jakarta-sans/600.css";
+@import "@fontsource/plus-jakarta-sans/700.css";
+@import "@fontsource/geist-mono";
+
+@theme {
+  --font-display: "Outfit", sans-serif;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+  
+  --color-brand-cyan: oklch(0.7 0.16 200);
+  --color-brand-cyan-light: oklch(0.85 0.08 200);
+  --color-brand-slate: oklch(0.2 0.02 240);
+  
+  --shadow-liquid: 0 20px 50px -12px rgba(6, 182, 212, 0.15);
+  --shadow-node: 0 4px 12px -2px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+
+  --animate-float-liquid: float-liquid 8s ease-in-out infinite;
+  
+  @keyframes float-liquid {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-15px) rotate(1deg); }
+    66% { transform: translateY(5px) rotate(-1deg); }
+  }
+}
+
+:root {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  color-scheme: light;
+  color: var(--color-brand-slate);
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.glass-premium {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  box-shadow: var(--shadow-node);
+}
+
+@keyframes marquee-slide {
+  from { transform: translateX(0%); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee-slide {
+  animation: marquee-slide 25s linear infinite;
+}
+
+.hover-pause:hover .animate-marquee-slide {
+  animation-play-state: paused;
+}
+
+/* OVERRIDE CONTAINER WIDTH */
+/* Atur angka di bawah ini (misal: 1440px, 1600px, atau 95%) 
+   untuk melebarkan margin kanan & kiri pada semua section (agar tidak terlalu ke tengah) */
+.container {
+  max-width: 1100px !important;
+}
+
+.canvas-grid {
+  background-image: radial-gradient(circle at 1px 1px, rgba(0, 0, 0, 0.05) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+.selection-ring {
+  box-shadow: 0 0 0 2px white, 0 0 0 4px var(--color-brand-cyan);
+}
+
+/* Liquid Transition Utilities */
+.transition-liquid {
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+* {
+  scroll-behavior: smooth;
+}
