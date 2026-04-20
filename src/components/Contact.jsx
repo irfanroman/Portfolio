@@ -11,25 +11,33 @@ const Linkedin = (props) => (
 
 const Contact = ({ personal }) => {
   return (
-    <section id="contact" className="py-32 bg-white">
-      <div className="container mx-auto px-6">
-        <div className="glass-premium p-16 md:p-24 rounded-[4rem] border border-slate-100 flex flex-col lg:flex-row items-center justify-between gap-16 overflow-hidden relative shadow-liquid">
+    <section id="contact" className="py-20 md:py-32 bg-white">
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="glass-premium p-8 md:p-16 lg:p-24 rounded-[2rem] md:rounded-[4rem] border border-slate-100 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 overflow-hidden relative shadow-liquid">
           {/* Subtle Glow */}
           <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-400/5 blur-[100px] -translate-x-1/2 -translate-y-1/2" />
           
           <div className="max-w-xl text-center lg:text-left relative z-10">
-            <span className="text-cyan-600 font-bold tracking-[0.2em] text-xs uppercase mb-6 block">Get in touch</span>
-            <h2 className="text-5xl md:text-6xl font-display font-bold text-slate-900 mb-8 leading-[0.95]">Ready to start the <span className="text-cyan-600">next project?</span></h2>
-            <p className="text-slate-500 text-xl font-medium mb-12 leading-relaxed">
-              I'm always looking for ambitious collaborations where design and engineering collide.
+            <span className="text-cyan-600 font-bold tracking-[0.2em] text-xs uppercase mb-6 flex items-center justify-center lg:justify-start gap-2">
+              Get in touch
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+              </span>
+            </span>
+            <h2 className="text-4xl md:text-6xl font-display font-bold text-slate-900 mb-6 md:mb-8 leading-[1.1]">
+              Ready to start the <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-emerald-500">next project?</span>
+            </h2>
+            <p className="text-slate-500 text-base md:text-lg font-medium mb-10 md:mb-12 leading-relaxed">
+              I'm always looking for ambitious collaborations where design and engineering collide. Let's build something extraordinary together.
             </p>
             <a 
               href={`mailto:${personal.email}`}
-              className="inline-flex items-center gap-4 text-1xl font-display font-bold text-slate-900 hover:text-cyan-600 transition-liquid group"
+              className="inline-flex items-center gap-4 text-lg md:text-xl font-display font-bold text-slate-900 hover:text-cyan-600 transition-liquid group break-all md:break-normal"
             >
               {personal.email}
-              <div className="p-3 bg-slate-900 text-white rounded-full group-hover:bg-cyan-500 transition-liquid shadow-lg">
-                <Mail className="w-3 h-3" />
+              <div className="p-3 bg-slate-900 text-white rounded-full group-hover:bg-cyan-500 transition-liquid shadow-lg shrink-0">
+                <Mail className="w-3.5 h-3.5" />
               </div>
             </a>
           </div>

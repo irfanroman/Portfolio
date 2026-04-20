@@ -47,15 +47,23 @@ const ProjectsBento = ({ projects }) => {
   return (
     <section id="projects" className="py-32 bg-white">
       <div className="container mx-auto px-6">
-        <div className="max-w-xl mb-20">
-          <span className="text-cyan-600 font-bold tracking-[0.2em] text-xs uppercase mb-4 block">Portfolio</span>
-          <h2 className="text-5xl font-display font-bold text-slate-900 mb-6">Highlighted <span className="text-cyan-600">Project.</span></h2>
-          <p className="text-slate-500 text-lg font-medium">
+        <div className="max-w-3xl mb-16">
+          <span className="text-cyan-600 font-bold tracking-[0.2em] text-xs uppercase mb-4 flex items-center gap-2">
+            Selected Work
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+            </span>
+          </span>
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6 leading-[1.1]">
+            Project <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-emerald-500">Showcase</span>
+          </h2>
+          <p className="text-slate-500 text-lg font-medium leading-relaxed max-w-2xl">
             Selected projects that demonstrate the fusion of advanced design thinking and robust engineering execution.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
