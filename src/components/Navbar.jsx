@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { cn } from "../lib/utils";
 
 const Navbar = () => {
   const [isVisible, setIsVisible] = useState(false);
