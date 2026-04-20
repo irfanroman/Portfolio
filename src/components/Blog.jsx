@@ -39,42 +39,49 @@ const BlogCard = ({ post, isFeatured }) => {
 
   return (
     <motion.a
+      layout
       href={post.link}
       target="_blank"
       rel="noreferrer"
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.95 }}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
       whileHover={{ y: -8 }}
-      transition={{ type: "spring", stiffness: 100, damping: 20 }}
+      transition={{ 
+        layout: { type: "spring", stiffness: 250, damping: 30 },
+        opacity: { duration: 0.2 }
+      }}
       className={cn(
-        "group relative overflow-hidden rounded-[2rem] border border-slate-100 flex shadow-xl hover:shadow-cyan-100/40 hover:border-cyan-200/50 transition-liquid bg-white glass-premium",
-        isFeatured ? "flex-col md:flex-row md:col-span-2 lg:col-span-2 min-h-[400px]" : "flex-col col-span-1 min-h-[380px]"
+        "group relative overflow-hidden rounded-[2rem] border border-slate-100 flex shadow-xl hover:shadow-cyan-100/40 hover:border-cyan-200/50 bg-white glass-premium",
+        isFeatured ? "flex-col md:flex-row md:col-span-2 min-h-[400px]" : "flex-col col-span-1 min-h-[380px]"
       )}
     >
       {/* Glow Effect */}
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-liquid" />
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-all duration-500" />
 
       {/* Image Preview */}
-      <div className={cn(
-        "relative overflow-hidden shrink-0",
-        isFeatured ? "w-full md:w-[45%] h-64 md:h-full" : "w-full aspect-[16/10]"
-      )}>
+      <motion.div 
+        layout
+        className={cn(
+          "relative overflow-hidden shrink-0",
+          isFeatured ? "w-full md:w-[45%] h-64 md:h-full" : "w-full aspect-[16/10]"
+        )}
+      >
         <img 
           src={imageUrl}
           alt={post.title} 
-          className="object-cover w-full h-full transform group-hover:scale-105 transition-liquid duration-1000"
+          className="object-cover w-full h-full transform group-hover:scale-105 transition-all duration-1000"
         />
-        <div className="absolute inset-0 bg-slate-900/5 group-hover:bg-slate-900/0 transition-liquid" />
+        <div className="absolute inset-0 bg-slate-900/5 group-hover:bg-slate-900/0" />
         {isFeatured && (
           <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest text-cyan-600 shadow-sm border border-white/20">
             Featured Article
           </div>
         )}
-      </div>
+      </motion.div>
 
       {/* Content */}
-      <div className="flex flex-col flex-grow p-6 lg:p-8">
+      <motion.div layout className="flex flex-col flex-grow p-6 lg:p-8">
         <div className="flex flex-wrap items-center gap-3 mb-4">
           <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
              <CalendarDays className="w-3.5 h-3.5" />
@@ -106,11 +113,11 @@ const BlogCard = ({ post, isFeatured }) => {
               </span>
             ))}
           </div>
-          <div className="p-2 bg-slate-50 rounded-full group-hover:bg-cyan-500 group-hover:text-white transition-liquid text-slate-400">
+          <div className="p-2 bg-slate-50 rounded-full group-hover:bg-cyan-500 group-hover:text-white transition-all text-slate-400">
             <ExternalLink className="w-4 h-4" />
           </div>
         </div>
-      </div>
+      </motion.div>
     </motion.a>
   );
 };
@@ -194,7 +201,7 @@ const Blog = () => {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
             </span>
           </span>
-          <h2 className="text-5xl font-display font-bold text-slate-900 mb-6 w-full leading-[1.1]">
+          <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6 w-full leading-[1.1]">
             Exploring ideas in <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-emerald-500">design and engineering.</span>
           </h2>
           <p className="text-slate-500 text-lg font-medium leading-relaxed max-w-2xl">
@@ -203,18 +210,18 @@ const Blog = () => {
         </div>
 
         {/* Toolbar: Search and Filter */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-6 mb-16">
+        <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-8 mb-16">
           
           {/* Categories */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 hide-scrollbar flex-nowrap md:flex-wrap">
+          <div className="flex items-center gap-2 overflow-x-auto pb-4 lg:pb-0 hide-scrollbar flex-nowrap -mx-6 px-6 lg:mx-0 lg:px-0">
             {categories.map((cat, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveCategory(cat)}
                 className={cn(
-                  "px-5 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap",
+                  "px-5 py-2.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap shadow-sm",
                   activeCategory === cat 
-                    ? "bg-slate-900 text-white shadow-md" 
+                    ? "bg-slate-900 text-white shadow-cyan-200/50" 
                     : "bg-white text-slate-500 border border-slate-200 hover:border-cyan-200 hover:text-cyan-600 hover:bg-cyan-50"
                 )}
               >
@@ -224,7 +231,7 @@ const Blog = () => {
           </div>
 
           {/* Search Box */}
-          <div className="relative group w-full md:w-[320px]">
+          <div className="relative group w-full lg:w-[320px]">
             <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-cyan-500 transition-colors">
               <Search className="h-4 w-4" />
             </div>
@@ -233,7 +240,7 @@ const Blog = () => {
               placeholder="Search articles..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="block w-full pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all shadow-sm"
+              className="block w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all shadow-sm"
             />
           </div>
         </div>
@@ -248,27 +255,32 @@ const Blog = () => {
           </div>
         ) : (
           /* Asymmetrical Post Grid */
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <motion.div 
+            layout
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
             <AnimatePresence mode="popLayout">
               {filteredPosts.length > 0 ? (
                 filteredPosts.map((post, i) => (
                   <BlogCard 
                     key={post.link} 
                     post={post} 
-                    isFeatured={i === 0 && activeCategory === "All" && searchQuery === ""} 
+                    isFeatured={activeCategory === "All" && searchQuery === "" && i === 0} 
                   />
                 ))
               ) : (
                 <motion.div 
+                  key="no-results"
                   initial={{ opacity: 0 }} 
                   animate={{ opacity: 1 }} 
+                  exit={{ opacity: 0 }}
                   className="col-span-full py-20 text-center text-slate-500"
                 >
                   <p className="text-lg">No articles found matching your criteria.</p>
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
+          </motion.div>
         )}
       </div>
     </section>
