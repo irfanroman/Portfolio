@@ -8,6 +8,7 @@ import Blog from "./components/Blog";
 import TechMarquee from "./components/TechMarquee";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
+import BackToTop from "./components/BackToTop";
 import data from "./data.json";
 
 const FadeIn = ({ children }) => (
@@ -28,18 +29,29 @@ function App() {
       <main>
         <FadeIn><Hero personal={data.personal} /></FadeIn>
         <FadeIn>
-          <AboutCanvas 
-            journey={data.career_journey} 
-            experience_projects={data.experience_projects}
-            personal={data.personal}
-          />
+          <div id="about">
+            <AboutCanvas 
+              journey={data.career_journey} 
+              experience_projects={data.experience_projects}
+              personal={data.personal}
+            />
+          </div>
         </FadeIn>
-        <FadeIn><ProjectsBento projects={data.projects} /></FadeIn>
-        <FadeIn><Blog /></FadeIn>
-        <FadeIn><TechMarquee stack={data.tech_stack} /></FadeIn>
-        <FadeIn><Contact personal={data.personal} /></FadeIn>
+        <div id="projects">
+          <FadeIn><ProjectsBento projects={data.projects} /></FadeIn>
+        </div>
+        <div id="blog">
+          <FadeIn><Blog /></FadeIn>
+        </div>
+        <div id="stack">
+          <FadeIn><TechMarquee stack={data.tech_stack} /></FadeIn>
+        </div>
+        <div id="contact">
+          <FadeIn><Contact personal={data.personal} /></FadeIn>
+        </div>
       </main>
       <FadeIn><Footer /></FadeIn>
+      <BackToTop />
     </div>
   );
 }

@@ -9,6 +9,7 @@ const ProjectCard = ({ project }) => {
       href={project.link || "#"}
       target={project.link ? "_blank" : undefined}
       rel={project.link ? "noopener noreferrer" : undefined}
+      aria-label={`View project: ${project.title}`}
       whileHover={{ y: -12 }}
       transition={{ type: "spring", stiffness: 100, damping: 20 }}
       className={cn(
@@ -45,7 +46,7 @@ const ProjectCard = ({ project }) => {
 
 const ProjectsBento = ({ projects }) => {
   return (
-    <section id="projects" className="py-32 bg-white">
+    <section aria-label="Projects" id="projects" className="py-32 bg-white">
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mb-16">
           <span className="text-cyan-600 font-bold tracking-[0.2em] text-xs uppercase mb-4 flex items-center gap-2">

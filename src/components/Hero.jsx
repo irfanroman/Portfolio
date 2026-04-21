@@ -4,7 +4,7 @@ import { FileText, ChevronRight, Zap } from "lucide-react";
 
 const Hero = ({ personal }) => {
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-white">
+    <section aria-label="Hero" className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-white">
       {/* Dynamic Cyan Radial Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-cyan-400/10 blur-[120px] rounded-full" />
@@ -57,14 +57,21 @@ const Hero = ({ personal }) => {
           transition={{ duration: 1.2, delay: 0.6, ease: [0.23, 1, 0.32, 1] }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 md:gap-6"
         >
-          <button className="w-full sm:w-auto px-10 py-5 bg-slate-900 text-white rounded-full font-bold hover:bg-slate-800 transition-liquid flex items-center justify-center gap-2 group shadow-2xl hover:shadow-cyan-200/50">
-            View My Work
-            <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </button>
-          <button className="w-full sm:w-auto glass-premium px-10 py-5 rounded-full font-bold text-slate-800 hover:bg-white transition-liquid flex items-center justify-center gap-2 border border-slate-200/50 shadow-xl hover:shadow-cyan-100/30">
+          <a href="#projects" aria-label="View my projects" className="w-full sm:w-auto">
+            <button className="w-full sm:w-auto px-10 py-5 bg-slate-900 text-white rounded-full font-bold hover:bg-slate-800 transition-liquid flex items-center justify-center gap-2 group shadow-2xl hover:shadow-cyan-200/50">
+              View My Work
+              <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </a>
+          <a 
+            href={personal.cv_url} 
+            download 
+            aria-label="Download CV as PDF"
+            className="w-full sm:w-auto glass-premium px-10 py-5 rounded-full font-bold text-slate-800 hover:bg-white transition-liquid flex items-center justify-center gap-2 border border-slate-200/50 shadow-xl hover:shadow-cyan-100/30"
+          >
             <FileText className="w-5 h-5" />
             Download CV
-          </button>
+          </a>
         </motion.div>
       </div>
     </section>

@@ -11,7 +11,7 @@ const Linkedin = (props) => (
 
 const Contact = ({ personal }) => {
   return (
-    <section id="contact" className="py-20 md:py-32 bg-white">
+    <section aria-label="Contact" id="contact" className="py-20 md:py-32 bg-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="glass-premium p-8 md:p-16 lg:p-24 rounded-[2rem] md:rounded-[4rem] border border-slate-100 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 overflow-hidden relative shadow-liquid">
           {/* Subtle Glow */}
@@ -33,6 +33,7 @@ const Contact = ({ personal }) => {
             </p>
             <a 
               href={`mailto:${personal.email}`}
+              aria-label="Send email"
               className="inline-flex items-center gap-4 text-lg md:text-xl font-display font-bold text-slate-900 hover:text-cyan-600 transition-liquid group break-all md:break-normal"
             >
               {personal.email}
@@ -51,6 +52,9 @@ const Contact = ({ personal }) => {
               <a 
                 key={link.label}
                 href={link.href}
+                aria-label={link.label}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
                 className="flex items-center justify-between gap-12 glass-premium px-8 py-5 rounded-[1.5rem] hover:bg-white transition-liquid border border-slate-100 shadow-sm group hover:shadow-liquid hover:border-cyan-200"
               >
                 <div className="flex items-center gap-4">

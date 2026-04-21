@@ -43,6 +43,7 @@ const BlogCard = ({ post, isFeatured }) => {
       href={post.link}
       target="_blank"
       rel="noreferrer"
+      aria-label={`Read article: ${post.title}`}
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
@@ -189,7 +190,7 @@ const Blog = () => {
   }, [posts, searchQuery, activeCategory]);
 
   return (
-    <section id="blog" className="py-32 bg-slate-50/50">
+    <section aria-label="Blog articles" id="blog" className="py-32 bg-slate-50/50">
       <div className="container mx-auto px-6">
         
         {/* Header Area */}
@@ -213,7 +214,7 @@ const Blog = () => {
         <div className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-8 mb-16">
           
           {/* Categories */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-4 lg:pb-0 hide-scrollbar flex-nowrap -mx-6 px-6 lg:mx-0 lg:px-0">
+          <div role="group" aria-label="Filter by category" className="flex items-center gap-2 overflow-x-auto pb-4 lg:pb-0 hide-scrollbar flex-nowrap -mx-6 px-6 lg:mx-0 lg:px-0">
             {categories.map((cat, idx) => (
               <button
                 key={idx}
@@ -240,6 +241,7 @@ const Blog = () => {
               placeholder="Search articles..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              aria-label="Search articles"
               className="block w-full pl-11 pr-4 py-3.5 bg-white border border-slate-200 rounded-2xl text-sm font-medium text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 transition-all shadow-sm"
             />
           </div>

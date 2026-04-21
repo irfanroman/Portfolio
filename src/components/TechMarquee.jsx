@@ -5,7 +5,7 @@ const TechMarquee = ({ stack }) => {
   // we render multiple copies directly below
 
   return (
-    <section id="stack" className="py-32 bg-slate-50/50 overflow-hidden relative">
+    <section aria-label="Tech stack" id="stack" className="py-32 bg-slate-50/50 overflow-hidden relative">
       <div className="container mx-auto px-6 mb-16 relative z-10">
         <div className="max-w-3xl">
           <span className="text-cyan-600 font-bold tracking-[0.2em] text-xs uppercase mb-4 flex items-center gap-2">
@@ -21,7 +21,7 @@ const TechMarquee = ({ stack }) => {
         </div>
       </div>
 
-      <div className="relative flex overflow-hidden py-10 hover-pause">
+      <div role="marquee" aria-label="Scrolling tech stack" className="relative flex overflow-hidden py-10 hover-pause">
         <div className="flex w-max animate-marquee-slide">
           {[1, 2].map((copy) => (
             <div key={copy} className="flex gap-8 md:gap-16 items-center pr-8 md:pr-16">
