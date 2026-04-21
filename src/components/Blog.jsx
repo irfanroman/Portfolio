@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ArrowUpRight, Clock, CalendarDays, ExternalLink, Loader2 } from "lucide-react";
+import { X, Search, ArrowUpRight, Clock, CalendarDays, ExternalLink, Loader2, ArrowRight } from "lucide-react";
 import { cn } from "../lib/utils";
 
 // Helper to strip HTML from Medium description
@@ -23,7 +23,118 @@ const formatDate = (dateString) => {
   return new Date(dateString).toLocaleDateString('en-US', options);
 };
 
-const BlogCard = ({ post, isFeatured }) => {
+// --- BLOG DETAIL VIEW ---
+const BlogDetail = ({ post, onClose }) => {
+  // Extract images
+  let imageUrl = post.thumbnail;
+  if (!imageUrl && post.description) {
+    const imgMatch = post.description.match(/<img[^>]+src="([^">]+)"/);
+    if (imgMatch) imageUrl = imgMatch[1];
+  }
+  if (!imageUrl || imageUrl.includes('stat?event')) {
+    imageUrl = "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000";
+  }
+
+  // Extract first 2 paragraphs
+  const paragraphs = useMemo(() => {
+    const doc = new DOMParser().parseFromString(post.description, 'text/html');
+    return Array.from(doc.querySelectorAll('p'))
+      .map(p => p.textContent.trim())
+      .filter(text => text.length > 30)
+      .slice(0, 2);
+  }, [post.description]);
+  
+  const fullText = stripHtml(post.description);
+  
+  const displaySummary = paragraphs.length > 0 
+    ? paragraphs.join("\n\n") 
+    : fullText.substring(0, 450) + "...";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+    >
+      {/* Backdrop */}
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="absolute inset-0 bg-slate-900/60 backdrop-blur-xl"
+      />
+
+      {/* Modal Content */}
+      <motion.div
+        layoutId={`card-${post.link}`}
+        className="relative w-full max-w-4xl bg-white rounded-[2.5rem] shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh] md:max-h-[80vh] border border-white/20"
+      >
+        {/* Close Button */}
+        <button 
+          onClick={onClose}
+          className="absolute top-6 right-6 z-50 p-2 bg-slate-900/10 hover:bg-slate-900/20 rounded-full transition-colors backdrop-blur-md"
+        >
+          <X className="w-5 h-5 text-slate-800" />
+        </button>
+
+        {/* Hero Image */}
+        <div className="w-full md:w-1/2 h-64 md:h-auto relative shrink-0 overflow-hidden">
+          <motion.img 
+            initial={{ scale: 1.1 }}
+            animate={{ scale: 1 }}
+            src={imageUrl} 
+            alt={post.title}
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-900/40 to-transparent md:hidden" />
+        </div>
+
+        {/* Copy */}
+        <div className="flex-1 p-8 md:p-12 overflow-y-auto custom-scrollbar">
+          <div className="flex items-center gap-3 mb-6">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-600 bg-cyan-50 px-3 py-1 rounded-full">{post.categories?.[0] || "Article"}</span>
+            <span className="w-1 h-1 rounded-full bg-slate-200"></span>
+            <span className="text-xs font-medium text-slate-400">{formatDate(post.pubDate)}</span>
+          </div>
+
+          <h2 className="text-2xl md:text-4xl font-display font-bold text-slate-900 leading-tight mb-8">
+            {post.title}
+          </h2>
+
+          <div className="space-y-6 mb-10">
+            {paragraphs.length > 0 ? (
+              paragraphs.map((para, idx) => (
+                <p key={idx} className="text-slate-600 text-base md:text-lg leading-relaxed">
+                  {para}
+                </p>
+              ))
+            ) : (
+              <p className="text-slate-600 text-base md:text-lg leading-relaxed">
+                {displaySummary}
+              </p>
+            )}
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-4 pt-6 border-t border-slate-100">
+            <a 
+              href={post.link}
+              target="_blank"
+              rel="noreferrer"
+              className="w-full sm:w-auto flex items-center justify-center gap-3 bg-cyan-600 text-white px-10 py-5 rounded-2xl font-bold text-sm tracking-widest hover:bg-cyan-700 hover:shadow-xl hover:shadow-cyan-200/50 transition-all group"
+            >
+              Read more on Medium
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </a>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+const BlogCard = ({ post, isFeatured, onClick }) => {
   // Extract first image from content if thumbnail is empty or missing
   let imageUrl = post.thumbnail;
   if (!imageUrl && post.description) {
@@ -38,22 +149,16 @@ const BlogCard = ({ post, isFeatured }) => {
   const cleanExcerpt = stripHtml(post.description).substring(0, isFeatured ? 250 : 120) + "...";
 
   return (
-    <motion.a
-      layout
-      href={post.link}
-      target="_blank"
-      rel="noreferrer"
+    <motion.div
+      layoutId={`card-${post.link}`}
+      onClick={onClick}
       aria-label={`Read article: ${post.title}`}
       initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
       whileHover={{ y: -8 }}
-      transition={{ 
-        layout: { type: "spring", stiffness: 250, damping: 30 },
-        opacity: { duration: 0.2 }
-      }}
       className={cn(
-        "group relative overflow-hidden rounded-[2rem] border border-slate-100 flex shadow-xl hover:shadow-cyan-100/40 hover:border-cyan-200/50 bg-white glass-premium",
+        "group relative overflow-hidden rounded-[2rem] border border-slate-100 flex shadow-xl hover:shadow-cyan-100/40 hover:border-cyan-200/50 bg-white glass-premium cursor-pointer",
         isFeatured ? "flex-col md:flex-row md:col-span-2 min-h-[400px]" : "flex-col col-span-1 min-h-[380px]"
       )}
     >
@@ -61,8 +166,7 @@ const BlogCard = ({ post, isFeatured }) => {
       <div className="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-all duration-500" />
 
       {/* Image Preview */}
-      <motion.div 
-        layout
+      <div 
         className={cn(
           "relative overflow-hidden shrink-0",
           isFeatured ? "w-full md:w-[45%] h-64 md:h-full" : "w-full aspect-[16/10]"
@@ -79,10 +183,10 @@ const BlogCard = ({ post, isFeatured }) => {
             Featured Article
           </div>
         )}
-      </motion.div>
+      </div>
 
       {/* Content */}
-      <motion.div layout className="flex flex-col flex-grow p-6 lg:p-8">
+      <div className="flex flex-col flex-grow p-6 lg:p-8">
         <div className="flex flex-wrap items-center gap-3 mb-4">
           <div className="flex items-center gap-1.5 text-slate-400 text-xs font-medium">
              <CalendarDays className="w-3.5 h-3.5" />
@@ -115,11 +219,11 @@ const BlogCard = ({ post, isFeatured }) => {
             ))}
           </div>
           <div className="p-2 bg-slate-50 rounded-full group-hover:bg-cyan-500 group-hover:text-white transition-all text-slate-400">
-            <ExternalLink className="w-4 h-4" />
+            <ArrowRight className="w-4 h-4" />
           </div>
         </div>
-      </motion.div>
-    </motion.a>
+      </div>
+    </motion.div>
   );
 };
 
@@ -128,6 +232,7 @@ const Blog = () => {
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
+  const [selectedPost, setSelectedPost] = useState(null);
   
   useEffect(() => {
     const fetchMediumPosts = async () => {
@@ -257,10 +362,7 @@ const Blog = () => {
           </div>
         ) : (
           /* Asymmetrical Post Grid */
-          <motion.div 
-            layout
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          >
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <AnimatePresence mode="popLayout">
               {filteredPosts.length > 0 ? (
                 filteredPosts.map((post, i) => (
@@ -268,6 +370,7 @@ const Blog = () => {
                     key={post.link} 
                     post={post} 
                     isFeatured={activeCategory === "All" && searchQuery === "" && i === 0} 
+                    onClick={() => setSelectedPost(post)}
                   />
                 ))
               ) : (
@@ -282,8 +385,18 @@ const Blog = () => {
                 </motion.div>
               )}
             </AnimatePresence>
-          </motion.div>
+          </div>
         )}
+
+        {/* Article Preview Modal */}
+        <AnimatePresence>
+          {selectedPost && (
+            <BlogDetail 
+              post={selectedPost} 
+              onClose={() => setSelectedPost(null)} 
+            />
+          )}
+        </AnimatePresence>
       </div>
     </section>
   );
