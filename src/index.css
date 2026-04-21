@@ -60,8 +60,8 @@ h1, h2, h3, .font-display {
 }
 
 @keyframes marquee-slide {
-  from { transform: translateX(0%); }
-  to { transform: translateX(-50%); }
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0%); }
 }
 
 .animate-marquee-slide {
@@ -96,4 +96,8 @@ h1, h2, h3, .font-display {
 
 * {
   scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 5rem;
 }
