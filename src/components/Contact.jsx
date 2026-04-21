@@ -36,10 +36,10 @@ const Contact = ({ personal }) => {
               aria-label="Send email"
               className="inline-flex items-center gap-4 text-lg md:text-xl font-display font-bold text-slate-900 hover:text-cyan-600 transition-liquid group break-all md:break-normal"
             >
-              {personal.email}
-              <div className="p-3 bg-slate-900 text-white rounded-full group-hover:bg-cyan-500 transition-liquid shadow-lg shrink-0">
-                <Mail className="w-3.5 h-3.5" />
+              <div className="p-3 bg-slate-900 text-white rounded-xl group-hover:bg-cyan-600 transition-liquid shadow-lg shrink-0">
+                <Mail className="w-4 h-4" />
               </div>
+              {personal.email}
             </a>
           </div>
 
