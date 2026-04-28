@@ -7,17 +7,44 @@ const TechMarquee = ({ stack }) => {
   return (
     <section aria-label="Tech stack" id="stack" className="py-32 bg-slate-50/50 overflow-hidden relative">
       <div className="container mx-auto px-6 mb-16 relative z-10">
-        <div className="max-w-3xl">
-          <span className="text-cyan-600 font-bold tracking-[0.2em] text-xs uppercase mb-4 flex items-center gap-2">
-            Development Stack
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-            </span>
-          </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6 leading-[1.1]">
-            Tech <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-emerald-500">Stack.</span>
-          </h2>
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20 relative">
+          {/* Editorial Section Label */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="absolute -top-12 left-0"
+          >
+            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-[0.4em]">Section / 07</span>
+          </motion.div>
+
+          <div className="max-w-2xl">
+            
+            <h2 className="text-4xl md:text-6xl font-editorial italic text-slate-900 leading-[0.9] mb-8 tracking-tighter">
+               Tech <span className="text-cyan-600">Stack</span>
+              <span className="relative">
+                <motion.svg 
+                  className="absolute -bottom-2 left-0 w-full h-2 text-cyan-200/50" 
+                  viewBox="0 0 100 10" 
+                  preserveAspectRatio="none"
+                >
+                  <motion.path 
+                    d="M0,5 Q25,0 50,5 T100,5" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                  />
+                </motion.svg>
+              </span>
+            </h2>
+          </div>
+
+          <div className="hidden lg:flex flex-col items-end gap-2 text-right">
+             <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">Infrastructure</span>
+             <span className="text-xs font-black text-slate-900 uppercase">Modern / Scalable</span>
+          </div>
         </div>
       </div>
 

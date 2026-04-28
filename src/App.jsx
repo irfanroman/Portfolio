@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import AboutCanvas from "./components/AboutCanvas";
+import ProjectTimeline from "./components/ProjectTimeline";
 import ProjectsBento from "./components/ProjectsBento";
 import Blog from "./components/Blog";
 import TechMarquee from "./components/TechMarquee";
@@ -29,13 +30,14 @@ function App() {
       <main>
         <FadeIn><Hero personal={data.personal} /></FadeIn>
         <FadeIn>
-          <div id="about">
-            <AboutCanvas 
-              journey={data.career_journey} 
-              experience_projects={data.experience_projects}
-              personal={data.personal}
-            />
-          </div>
+          <AboutCanvas 
+            journey={data.career_journey} 
+            experience_projects={data.experience_projects}
+            personal={data.personal}
+          />
+        </FadeIn>
+        <FadeIn>
+          <ProjectTimeline timeline={data.project_timeline} />
         </FadeIn>
         <div id="projects">
           <FadeIn><ProjectsBento projects={data.projects} /></FadeIn>

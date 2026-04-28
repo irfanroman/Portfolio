@@ -32,7 +32,10 @@ const ProjectCard = ({ project }) => {
       {/* Content */}
       <div className="flex flex-col flex-grow">
         <div className="flex items-center justify-between mb-4">
-          <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-cyan-600 bg-cyan-50 px-3 py-1 rounded-full">{project.category}</span>
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-600 bg-cyan-50 px-3 py-1 rounded-full">{project.category}</span>
+            <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">{project.year}</span>
+          </div>
           <div className="p-2 bg-slate-50 rounded-full group-hover:bg-cyan-500 group-hover:text-white transition-liquid">
             <ArrowUpRight className="w-4 h-4" />
           </div>
@@ -46,25 +49,49 @@ const ProjectCard = ({ project }) => {
 
 const ProjectsBento = ({ projects }) => {
   return (
-    <section aria-label="Projects" id="projects" className="py-32 bg-white">
+    <section className="py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="max-w-3xl mb-16">
-          <span className="text-cyan-600 font-bold tracking-[0.2em] text-xs uppercase mb-4 flex items-center gap-2">
-            Selected Work
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-            </span>
-          </span>
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 mb-6 leading-[1.1]">
-            Project <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-emerald-500">Showcase</span>
-          </h2>
-          <p className="text-slate-500 text-lg font-medium leading-relaxed max-w-2xl">
-            Selected projects that demonstrate the fusion of advanced design thinking and robust engineering execution.
-          </p>
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20 relative">
+          {/* Editorial Section Label */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="absolute -top-12 left-0"
+          >
+            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-[0.4em]">Section / 04</span>
+          </motion.div>
+
+          <div className="max-w-2xl">
+            
+           <h2 className="text-5xl md:text-6xl font-editorial italic text-slate-900 leading-[1] mb-2 tracking-tighter whitespace-nowrap">
+                         Selected <span className="text-cyan-600 relative">
+                           Work
+                           <motion.svg 
+                             className="absolute -bottom-2 left-0 w-full h-2 text-cyan-200/50" 
+                             viewBox="0 0 100 10" 
+                             preserveAspectRatio="none"
+                           >
+                             <motion.path 
+                               d="M0,5 Q25,0 50,5 T100,5" 
+                               fill="none" 
+                               stroke="currentColor" 
+                               strokeWidth="2"
+                               initial={{ pathLength: 0 }}
+                               whileInView={{ pathLength: 1 }}
+                             />
+                           </motion.svg>
+                         </span>
+                       </h2>
+          </div>
+
+          <div className="hidden lg:flex flex-col items-end gap-2 text-right">
+             <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">Architecture</span>
+             <span className="text-xs font-black text-slate-900 uppercase">Scalable / Precise / Performant</span>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}

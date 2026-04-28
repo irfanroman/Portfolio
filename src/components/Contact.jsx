@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { ArrowUpRight, Mail } from "lucide-react";
 
 const Github = (props) => (
@@ -18,22 +19,39 @@ const Contact = ({ personal }) => {
           <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-400/5 blur-[100px] -translate-x-1/2 -translate-y-1/2" />
           
           <div className="max-w-xl text-center lg:text-left relative z-10">
-            <span className="text-cyan-600 font-bold tracking-[0.2em] text-xs uppercase mb-6 flex items-center justify-center lg:justify-start gap-2">
-              Get in touch
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
+            {/* Editorial Section Label */}
+            <motion.div 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="mb-8"
+            >
+              <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-[0.4em]">Section / 06</span>
+            </motion.div>
+
+            <h2 className="text-5xl md:text-6xl font-editorial italic text-slate-900 leading-[0.9] mb-10 tracking-tighter">
+              Ready to <span className="text-cyan-600">Start</span> the <br />
+              <span className="relative">
+                Next Project with me?
+                <motion.svg 
+                  className="absolute -bottom-2 left-0 w-full h-2 text-cyan-200/50" 
+                  viewBox="0 0 100 10" 
+                  preserveAspectRatio="none"
+                >
+                  <motion.path 
+                    d="M0,5 Q25,0 50,5 T100,5" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                  />
+                </motion.svg>
               </span>
-            </span>
-            <h2 className="text-4xl md:text-6xl font-display font-bold text-slate-900 mb-6 md:mb-8 leading-[1.1]">
-              Ready to start the <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-emerald-500">next project?</span>
             </h2>
-            <p className="text-slate-500 text-base md:text-lg font-medium mb-10 md:mb-12 leading-relaxed">
-              I'm always looking for ambitious collaborations where design and engineering collide. Let's build something extraordinary together.
-            </p>
+
             <a 
               href={`mailto:${personal.email}`}
-              aria-label="Send email"
               className="inline-flex items-center gap-4 text-lg md:text-xl font-display font-bold text-slate-900 hover:text-cyan-600 transition-liquid group break-all md:break-normal"
             >
               <div className="p-3 bg-slate-900 text-white rounded-xl group-hover:bg-cyan-600 transition-liquid shadow-lg shrink-0">

@@ -117,6 +117,7 @@
       "id": 1,
       "title": "AISBA School Website",
       "category": "Fullstack Dev",
+      "year": "2026",
       "description": "An integrated school platform providing academic info, school profiles, and online services.",
       "image": "https://aisba.sch.id/frontend/assets/image/hero_bg.png",
       "size": "large",
@@ -126,6 +127,7 @@
       "id": 2,
       "title": "Dashboard Website",
       "category": "Utilities",
+      "year": "2025",
       "description": "A comprehensive administrative dashboard for managing and monitoring system operations.",
       "image": "https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=1000",
       "size": "medium",
@@ -135,10 +137,32 @@
       "id": 3,
       "title": "Travel App",
       "category": "UI/UX Designer",
+      "year": "2024",
       "description": "Intuitive and engaging user interface design for a modern travel and exploration application.",
       "image": "https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?q=80&w=1000",
       "size": "medium",
       "link": ""
     }
+  ],
+  "project_timeline": [
+    { "date": "2026-04-25", "level": 4, "note": "Launched AISBA School Website" },
+    { "date": "2026-04-20", "level": 2, "note": "Refined RWID Design System" },
+    { "date": "2026-04-15", "level": 3, "note": "Implemented Dashboard Analytics" },
+    { "date": "2026-04-05", "level": 1, "note": "Updated Tech Stack Documentation" },
+    { "date": "2026-03-28", "level": 4, "note": "Travel App UI Kit Completed" },
+    { "date": "2026-03-15", "level": 2, "note": "Server Migration for Pann.my.id" },
+    { "date": "2026-03-02", "level": 3, "note": "Vercel Pipeline Optimization" },
+    { "date": "2026-02-20", "level": 1, "note": "SMK Boarding School Lab Setup" },
+    { "date": "2026-01-10", "level": 4, "note": "New Portfolio Design Concept" },
+    { "date": "2025-12-15", "level": 3, "note": "Won Design Competition at IDN" },
+    { "date": "2025-10-10", "level": 4, "note": "Internship at Remote Worker Indonesia Started" },
+    { "date": "2025-08-20", "level": 2, "note": "Deployed First Dockerized App" },
+    { "date": "2025-05-15", "level": 3, "note": "Mastered React & Tailwind Fundamentals" },
+    { "date": "2025-03-01", "level": 1, "note": "First Commercial UI Project" },
+    { "date": "2024-11-20", "level": 4, "note": "Completed Advanced Figma Course" },
+    { "date": "2024-08-10", "level": 2, "note": "First Open Source Contribution" },
+    { "date": "2024-06-05", "level": 3, "note": "Launched Personal Blog v1" },
+    { "date": "2024-02-15", "level": 1, "note": "Started Learning Web Development" },
+    { "date": "2023-10-10", "level": 2, "note": "Explored Graphic Design Basics" }
   ]
 }

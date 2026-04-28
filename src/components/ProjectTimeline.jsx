@@ -77,7 +77,7 @@ const ProjectTimeline = ({ timeline }) => {
   return (
     <section aria-label="Project Timeline" id="timeline" className="py-24 bg-white overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-20 relative">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-12 mb-10 relative">
           {/* Editorial Section Label */}
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
@@ -88,11 +88,9 @@ const ProjectTimeline = ({ timeline }) => {
             <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-[0.4em]">Section / 03</span>
           </motion.div>
 
-          <div className="max-w-2xl">
-            
-            <h2 className="text-5xl md:text-6xl font-editorial italic text-slate-900 leading-[1] mb-6 tracking-tighter">
-              Project <span className="text-cyan-600">Archive</span> & <br />
-              Activity <span className="relative">
+          <div className="flex flex-col gap-8 max-w-4xl">
+            <h2 className="text-5xl md:text-6xl font-editorial italic text-slate-900 leading-[1] mb-2 tracking-tighter whitespace-nowrap">
+              Activity <span className="text-cyan-600 relative">
                 Journey
                 <motion.svg 
                   className="absolute -bottom-2 left-0 w-full h-2 text-cyan-200/50" 
@@ -110,87 +108,92 @@ const ProjectTimeline = ({ timeline }) => {
                 </motion.svg>
               </span>
             </h2>
-          </div>
-          
-          <div className="flex flex-wrap items-center gap-4 lg:mb-2">
-            {/* Year Selector Tabs with Archive Dropdown */}
-            <div className="flex p-1.5 bg-slate-100/80 backdrop-blur-md rounded-2xl border border-slate-200/50 items-center">
-              {availableYears.length > 3 && (
-                <div className="relative group/archive px-2 border-r border-slate-200/50 mr-1">
-                  <button className={cn(
-                    "flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-black transition-all duration-300 uppercase tracking-widest",
-                    availableYears.slice(3).includes(selectedYear)
-                      ? "bg-white text-cyan-600 shadow-sm border border-slate-200"
-                      : "text-slate-400 hover:text-slate-600"
-                  )}>
-                    {availableYears.slice(3).includes(selectedYear) ? selectedYear : "Archive"}
-                    <ChevronDown className="w-3 h-3 transition-transform group-hover/archive:rotate-180" />
+
+            <div className="flex flex-wrap items-center gap-4">
+              {/* Year Selector Tabs with Archive Dropdown */}
+              <div className="flex p-1.5 bg-slate-100/80 backdrop-blur-md rounded-2xl border border-slate-200/50 items-center">
+                {availableYears.length > 3 && (
+                  <div className="relative group/archive px-2 border-r border-slate-200/50 mr-1">
+                    <button className={cn(
+                      "flex items-center gap-2 px-3 py-2 rounded-xl text-xs font-black transition-all duration-300 uppercase tracking-widest",
+                      availableYears.slice(3).includes(selectedYear)
+                        ? "bg-white text-cyan-600 shadow-sm border border-slate-200"
+                        : "text-slate-400 hover:text-slate-600"
+                    )}>
+                      {availableYears.slice(3).includes(selectedYear) ? selectedYear : "Archive"}
+                      <ChevronDown className="w-3 h-3 transition-transform group-hover/archive:rotate-180" />
+                    </button>
+                    
+                    {/* Dropdown Menu */}
+                    <div className="absolute top-full left-0 mt-2 w-32 bg-white/90 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/archive:opacity-100 group-hover/archive:translate-y-0 group-hover/archive:pointer-events-auto transition-all duration-300 z-[60] p-1.5">
+                      {availableYears.slice(3).map((year) => (
+                        <button
+                          key={year}
+                          onClick={() => setSelectedYear(year)}
+                          className={cn(
+                            "w-full text-left px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-colors",
+                            selectedYear === year 
+                              ? "bg-cyan-50 text-cyan-600" 
+                              : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
+                          )}
+                        >
+                          {year}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Recent years sorted chronologically */}
+                {availableYears.slice(0, 3).reverse().map((year) => (
+                  <button
+                    key={year}
+                    onClick={() => setSelectedYear(year)}
+                    className={cn(
+                      "px-4 py-2 rounded-xl text-xs font-black transition-all duration-300 uppercase tracking-widest",
+                      selectedYear === year 
+                        ? "bg-white text-cyan-600 shadow-sm border border-slate-200" 
+                        : "text-slate-400 hover:text-slate-600"
+                    )}
+                  >
+                    {year}
                   </button>
-                  
-                  {/* Dropdown Menu */}
-                  <div className="absolute top-full left-0 mt-2 w-32 bg-white/90 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-2xl opacity-0 translate-y-2 pointer-events-none group-hover/archive:opacity-100 group-hover/archive:translate-y-0 group-hover/archive:pointer-events-auto transition-all duration-300 z-[60] p-1.5">
-                    {availableYears.slice(3).map((year) => (
-                      <button
-                        key={year}
-                        onClick={() => setSelectedYear(year)}
+                ))}
+              </div>
+
+              <div className="flex items-center gap-6 p-4 rounded-2xl bg-slate-50/50 border border-slate-100">
+                <div className="flex flex-col">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Legend</span>
+                  <div className="flex items-center gap-1.5">
+                    {[0, 1, 2, 3, 4].map((level) => (
+                      <div 
+                        key={level} 
                         className={cn(
-                          "w-full text-left px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-colors",
-                          selectedYear === year 
-                            ? "bg-cyan-50 text-cyan-600" 
-                            : "text-slate-500 hover:bg-slate-50 hover:text-slate-900"
-                        )}
-                      >
-                        {year}
-                      </button>
+                          "w-3.5 h-3.5 rounded-[3px] border",
+                          level === 0 ? "bg-slate-100 border-slate-200" : getLevelColor(level)
+                        )} 
+                      />
                     ))}
                   </div>
                 </div>
-              )}
-
-              {/* Recent years sorted chronologically */}
-              {availableYears.slice(0, 3).reverse().map((year) => (
-                <button
-                  key={year}
-                  onClick={() => setSelectedYear(year)}
-                  className={cn(
-                    "px-4 py-2 rounded-xl text-xs font-black transition-all duration-300 uppercase tracking-widest",
-                    selectedYear === year 
-                      ? "bg-white text-cyan-600 shadow-sm border border-slate-200" 
-                      : "text-slate-400 hover:text-slate-600"
-                  )}
-                >
-                  {year}
-                </button>
-              ))}
-            </div>
-
-            <div className="flex items-center gap-6 p-4 rounded-2xl bg-slate-50/50 border border-slate-100">
-              <div className="flex flex-col">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 mb-2">Legend</span>
-                <div className="flex items-center gap-1.5">
-                  {[0, 1, 2, 3, 4].map((level) => (
-                    <div 
-                      key={level} 
-                      className={cn(
-                        "w-3.5 h-3.5 rounded-[3px] border",
-                        level === 0 ? "bg-slate-100 border-slate-200" : getLevelColor(level)
-                      )} 
-                    />
-                  ))}
+                <div className="w-px h-8 bg-slate-200" />
+                <div className="flex flex-col min-w-[80px]">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Total</span>
+                  <span className="text-sm font-black text-slate-800">{stats.total} Milestones</span>
                 </div>
               </div>
-              <div className="w-px h-8 bg-slate-200" />
-              <div className="flex flex-col min-w-[80px]">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Total</span>
-                <span className="text-sm font-black text-slate-800">{stats.total} Milestones</span>
-              </div>
             </div>
+          </div>
+
+          <div className="hidden lg:flex flex-col items-end gap-2 text-right">
+             <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-widest">Documentation</span>
+             <span className="text-xs font-black text-slate-900 uppercase">History / Milestones</span>
           </div>
         </div>
 
         <div className="relative group">
           {/* Glass Card Container */}
-          <div className="glass-premium p-8 md:p-12 pt-20 md:pt-24 rounded-[2.5rem] border border-slate-100 shadow-2xl shadow-slate-200/40 overflow-x-auto no-scrollbar relative">
+          <div className="glass-premium p-8 md:p-12 pt-12 md:pt-16 rounded-[2.5rem] border border-slate-100 shadow-2xl shadow-slate-200/40 overflow-x-auto no-scrollbar relative">
             <div className="min-w-[850px] flex flex-col gap-6">
               
               {/* Month Labels */}

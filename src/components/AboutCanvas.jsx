@@ -1,12 +1,12 @@
 import React, { useRef, useState, useEffect, useCallback } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
-import { 
-  MousePointer2, 
-  Square, 
-  Type, 
-  PenTool, 
-  Hand, 
-  Layout, 
+import {
+  MousePointer2,
+  Square,
+  Type,
+  PenTool,
+  Hand,
+  Layout,
   Layers,
   Search,
   Plus,
@@ -21,6 +21,7 @@ import {
   Undo2
 } from "lucide-react";
 import { cn } from "../lib/utils";
+import irfanPhoto from "../img/Irfan.png";
 
 // --- DRAWING COLORS ---
 const DRAW_COLORS = [
@@ -60,7 +61,7 @@ const Toolbar = ({ activeTool, onToolChange, drawColor, onColorChange, onClear, 
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial="hidden"
       animate="visible"
       whileHover={{ y: -2 }}
@@ -87,13 +88,13 @@ const Toolbar = ({ activeTool, onToolChange, drawColor, onColorChange, onClear, 
           {tool.icon}
         </motion.button>
       ))}
-      
+
       <div className="w-px h-6 bg-slate-200 mx-1" />
 
       {/* Color picker + actions — visible when any draw tool is active */}
       <AnimatePresence>
         {isDrawTool && (
-          <motion.div 
+          <motion.div
             initial={{ width: 0, opacity: 0 }}
             animate={{ width: "auto", opacity: 1 }}
             exit={{ width: 0, opacity: 0 }}
@@ -108,28 +109,28 @@ const Toolbar = ({ activeTool, onToolChange, drawColor, onColorChange, onClear, 
                 onClick={() => onColorChange(color.value)}
                 className={cn(
                   "w-2.5 h-2.5 md:w-3 md:h-3 rounded-full transition-all duration-200 shrink-0 cursor-pointer",
-                  drawColor === color.value 
-                    ? "ring-2 ring-offset-1 ring-cyan-400 scale-110" 
+                  drawColor === color.value
+                    ? "ring-2 ring-offset-1 ring-cyan-400 scale-110"
                     : "hover:scale-125 opacity-70 hover:opacity-100"
                 )}
                 style={{ backgroundColor: color.value }}
               />
             ))}
             <div className="w-px h-4 bg-slate-200 mx-0.5" />
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.1, rotate: -10 }}
               whileTap={{ scale: 0.9 }}
-              aria-label="Undo" 
+              aria-label="Undo"
               title="Undo"
               onClick={onUndo}
               className="p-1 text-slate-400 hover:text-cyan-600 transition-colors cursor-pointer"
             >
               <Undo2 className="w-3 h-3" />
             </motion.button>
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.1, rotate: 10 }}
               whileTap={{ scale: 0.9 }}
-              aria-label="Clear all" 
+              aria-label="Clear all"
               title="Clear canvas"
               onClick={onClear}
               className={cn(
@@ -143,9 +144,9 @@ const Toolbar = ({ activeTool, onToolChange, drawColor, onColorChange, onClear, 
         )}
       </AnimatePresence>
 
-      <motion.button 
+      <motion.button
         whileHover={{ rotate: 15 }}
-        aria-label="Toggle layers" 
+        aria-label="Toggle layers"
         className="p-1.5 md:p-2 text-slate-400 hover:text-slate-600 cursor-pointer"
       >
         <Layers className="w-4 h-4" />
@@ -210,7 +211,7 @@ const TextInput = ({ position, color, onSubmit, onCancel }) => {
   };
 
   return (
-    <div 
+    <div
       className="absolute z-50"
       style={{ left: position.cssX, top: position.cssY }}
     >
@@ -310,8 +311,12 @@ const ProfileFrame = ({ personal, containerRef, onDrag, canDrag }) => {
       {canDrag && <DragHint show={hovered && !dragged} />}
 
       <div className="flex items-center gap-4 mb-5">
-        <div className="w-14 h-14 rounded-2xl bg-cyan-500 flex items-center justify-center border border-cyan-500/20 shadow-lg pr-0.5">
-          <span className="text-xl font-black text-white">IF</span>
+        <div className="w-14 h-14 rounded-2xl overflow-hidden border border-slate-200/50 shadow-lg bg-white p-0.5">
+          <img
+            src={irfanPhoto}
+            alt={personal.name}
+            className="w-full h-full object-cover object-center rounded-[inherit]"
+          />
         </div>
         <div>
           <h3 className="text-lg font-display font-bold text-slate-900 leading-tight">{personal.name}</h3>
@@ -322,9 +327,9 @@ const ProfileFrame = ({ personal, containerRef, onDrag, canDrag }) => {
         "{personal.who_is_irfan}"
       </p>
       <div className="mt-6 flex gap-2">
-         {["Creative", "Systematic", "Scaled"].map(tag => (
-           <span key={tag} className="text-[9px] font-bold py-1 px-3 bg-slate-50 text-slate-400 rounded-full border border-slate-100 uppercase tracking-widest">{tag}</span>
-         ))}
+        {["Creative", "Systematic", "Scaled"].map(tag => (
+          <span key={tag} className="text-[9px] font-bold py-1 px-3 bg-slate-50 text-slate-400 rounded-full border border-slate-100 uppercase tracking-widest">{tag}</span>
+        ))}
       </div>
     </motion.div>
   );
@@ -727,27 +732,45 @@ const AboutCanvas = ({ journey, experience_projects, personal }) => {
 
   return (
     <section aria-label="About me" id="about" ref={sectionRef} className="relative py-20 bg-white">
-      <motion.div 
-        className="container mx-auto px-6 mb-16 text-center"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.7, ease: [0.23, 1, 0.32, 1] }}
-      >
-         <span className="text-cyan-600 font-bold tracking-[0.2em] text-xs uppercase mb-4 flex items-center justify-center gap-2">
-           Workspace Archive
-           <span className="relative flex h-2 w-2">
-             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-             <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-           </span>
-         </span>
-         <h2 className="text-4xl md:text-5xl font-display font-bold text-slate-900 leading-[1.1]">
-           My Creative <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-emerald-500">Journeys.</span>
-         </h2>
-      </motion.div>
+      <div className="container mx-auto px-6 mb-20 relative">
+        <div className="flex flex-col items-center text-center relative">
+          {/* Editorial Section Label */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="absolute -top-12 left-1/2 -translate-x-1/2"
+          >
+            <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-[0.4em]">Section / 02</span>
+          </motion.div>
+
+          <div className="flex flex-col items-center max-w-3xl">
+
+            <h2 className="text-5xl md:text-6xl font-editorial italic text-slate-900 leading-[0.9] mb-8 tracking-tighter">
+              Workspace <span className="text-cyan-600">Journey</span>
+              <span className="relative">
+                <motion.svg
+                  className="absolute -bottom-2 left-0 w-full h-2 text-cyan-200/50"
+                  viewBox="0 0 100 10"
+                  preserveAspectRatio="none"
+                >
+                  <motion.path
+                    d="M0,5 Q25,0 50,5 T100,5"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    initial={{ pathLength: 0 }}
+                    whileInView={{ pathLength: 1 }}
+                  />
+                </motion.svg>
+              </span>
+            </h2>
+          </div>
+        </div>
+      </div>
 
       <div className="container mx-auto px-4 lg:px-12">
-        <motion.div 
+        <motion.div
           className="relative min-h-[600px] md:min-h-[750px] h-auto w-full border border-slate-200/60 rounded-[2rem] md:rounded-[3rem] bg-white canvas-dot-grid p-4 md:p-8 shadow-sm transition-all overflow-visible"
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -755,16 +778,16 @@ const AboutCanvas = ({ journey, experience_projects, personal }) => {
           transition={{ duration: 0.9, ease: [0.23, 1, 0.32, 1] }}
         >
           {/* Internal Canvas Surface */}
-          <div ref={containerRef} className="relative w-full h-full p-4 lg:p-20 overflow-visible flex flex-col items-center">
-            
+          <div ref={containerRef} className="relative w-full h-full p-4 lg:p-20 overflow-visible">
+
             <motion.div
               variants={toolbarVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
-              <Toolbar 
-                activeTool={activeTool} 
+              <Toolbar
+                activeTool={activeTool}
                 onToolChange={setActiveTool}
                 drawColor={drawColor}
                 onColorChange={setDrawColor}
@@ -775,17 +798,18 @@ const AboutCanvas = ({ journey, experience_projects, personal }) => {
             </motion.div>
 
             {/* Tool hint toast */}
-            <ToolHint 
-              show={!!toolHint} 
-              text={toolHint} 
-              icon={isPenActive ? PenTool : isFrameActive ? Square : isTextActive ? Type : null} 
+            <ToolHint
+              show={!!toolHint}
+              text={toolHint}
+              icon={isPenActive ? PenTool : isFrameActive ? Square : isTextActive ? Type : null}
             />
 
             {/* DRAWING CANVAS OVERLAY */}
             <canvas
               ref={drawCanvasRef}
               className={cn(
-                "absolute inset-0 w-full h-full rounded-[2rem] md:rounded-[3rem] z-20 pointer-events-auto",
+                "absolute inset-0 w-full h-full rounded-[2rem] md:rounded-[3rem] z-20",
+                isDrawMode ? "pointer-events-auto" : "pointer-events-none",
                 cursorClass
               )}
               onMouseDown={handlePointerDown}
@@ -800,30 +824,30 @@ const AboutCanvas = ({ journey, experience_projects, personal }) => {
 
             {/* Text input overlay */}
             {textInput && (
-              <TextInput 
-                position={textInput} 
-                color={drawColor} 
-                onSubmit={handleTextSubmit} 
-                onCancel={() => setTextInput(null)} 
+              <TextInput
+                position={textInput}
+                color={drawColor}
+                onSubmit={handleTextSubmit}
+                onCancel={() => setTextInput(null)}
               />
             )}
 
             {/* STRUCTURED GRID LAYOUT ON CANVAS */}
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 max-w-7xl w-full h-fit mt-20 md:mt-24 pb-12 md:pb-20">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 w-full h-fit mt-20 md:mt-24 pb-12 md:pb-20">
               {/* Left Column: About + Experience */}
-              <div className="flex flex-col gap-10 lg:gap-16 items-center lg:items-start">
+              <div className="flex flex-col gap-10 lg:gap-16 items-start">
                 <ProfileFrame personal={personal} containerRef={containerRef} onDrag={handleDrag} canDrag={canDrag} />
                 <ExperienceFrame experience={experience_projects} containerRef={containerRef} onDrag={handleDrag} canDrag={canDrag} />
               </div>
 
               {/* Right Column: Journey */}
-              <div className="flex justify-center lg:justify-end">
+              <div className="flex justify-start lg:justify-end">
                 <JourneyFrame journey={journey} containerRef={containerRef} onDrag={handleDrag} canDrag={canDrag} />
               </div>
             </div>
 
-             {/* UI HUD DECORATIONS */}
-            <motion.div 
+            {/* UI HUD DECORATIONS */}
+            <motion.div
               custom={0}
               variants={hudVariants}
               initial="hidden"
@@ -835,13 +859,9 @@ const AboutCanvas = ({ journey, experience_projects, personal }) => {
                 <Command className="w-3.5 h-3.5" />
                 <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-widest text-slate-900">About_v4</span>
               </div>
-              <div className="glass-premium p-1.5 md:p-2 px-2.5 md:px-3 rounded-lg text-slate-400 border border-slate-100 flex items-center gap-2">
-                <span className="text-[8px] md:text-[9px] font-bold uppercase tracking-widest text-slate-900">Artboard 1</span>
-                <ChevronDown className="w-3 h-3" />
-              </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               custom={1}
               variants={hudVariants}
               initial="hidden"
@@ -854,14 +874,9 @@ const AboutCanvas = ({ journey, experience_projects, personal }) => {
                 <span className="text-cyan-600 font-black">100%</span>
                 <button aria-label="Zoom in" className="p-1 hover:text-cyan-600 transition-colors"><Plus className="w-3 h-3" /></button>
               </div>
-              <div className="w-px h-4 md:h-5 bg-slate-200" />
-              <span className="flex items-center gap-2">
-                <Layout className="w-3 h-3" /> 
-                Live
-              </span>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               custom={2}
               variants={hudVariants}
               initial="hidden"
@@ -869,8 +884,8 @@ const AboutCanvas = ({ journey, experience_projects, personal }) => {
               viewport={{ once: true }}
               className="absolute top-6 right-6 md:top-8 md:right-8 hidden xl:flex items-center gap-3 glass-premium p-2 px-3 rounded-lg text-slate-400 border border-slate-100"
             >
-               <span className="text-[9px] font-bold uppercase tracking-widest">Published</span>
-               <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]" />
+              <span className="text-[9px] font-bold uppercase tracking-widest">Published</span>
+              <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.5)]" />
             </motion.div>
 
 
