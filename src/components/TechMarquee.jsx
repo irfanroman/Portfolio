@@ -20,7 +20,7 @@ const TechMarquee = ({ stack }) => {
 
           <div className="max-w-2xl">
             
-            <h2 className="text-4xl md:text-6xl font-editorial italic text-slate-900 leading-[0.9] mb-8 tracking-tighter">
+            <h2 className="text-4xl md:text-6xl font-editorial italic text-slate-900 leading-[1.1] mb-8 tracking-tighter whitespace-normal md:whitespace-nowrap">
                Tech <span className="text-cyan-600">Stack</span>
               <span className="relative">
                 <motion.svg 

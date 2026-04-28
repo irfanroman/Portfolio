@@ -89,7 +89,7 @@ const ProjectTimeline = ({ timeline }) => {
           </motion.div>
 
           <div className="flex flex-col gap-8 max-w-4xl">
-            <h2 className="text-5xl md:text-6xl font-editorial italic text-slate-900 leading-[1] mb-2 tracking-tighter whitespace-nowrap">
+            <h2 className="text-4xl md:text-6xl font-editorial italic text-slate-900 leading-[1.1] mb-2 tracking-tighter whitespace-normal md:whitespace-nowrap">
               Activity <span className="text-cyan-600 relative">
                 Journey
                 <motion.svg 

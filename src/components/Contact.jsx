@@ -14,7 +14,7 @@ const Contact = ({ personal }) => {
   return (
     <section aria-label="Contact" id="contact" className="py-20 md:py-32 bg-white">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="glass-premium p-8 md:p-16 lg:p-24 rounded-[2rem] md:rounded-[4rem] border border-slate-100 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 overflow-hidden relative shadow-liquid">
+        <div className="glass-premium p-6 md:p-16 lg:p-24 rounded-[2rem] md:rounded-[4rem] border border-slate-100 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16 overflow-hidden relative shadow-liquid">
           {/* Subtle Glow */}
           <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-400/5 blur-[100px] -translate-x-1/2 -translate-y-1/2" />
           
@@ -29,7 +29,7 @@ const Contact = ({ personal }) => {
               <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-[0.4em]">Section / 06</span>
             </motion.div>
 
-            <h2 className="text-5xl md:text-6xl font-editorial italic text-slate-900 leading-[0.9] mb-10 tracking-tighter">
+            <h2 className="text-4xl md:text-6xl font-editorial italic text-slate-900 leading-[1.1] mb-10 tracking-tighter whitespace-normal md:whitespace-nowrap">
               Ready to <span className="text-cyan-600">Start</span> the <br />
               <span className="relative">
                 Next Project with me?

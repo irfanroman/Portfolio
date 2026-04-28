@@ -81,14 +81,7 @@ const Hero = ({ personal }) => {
           className="relative"
         >
           {/* 2026 Pill */}
-          <motion.div 
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
-            className="absolute -top-10 left-1/4 -translate-x-1/2 bg-cyan-500 text-white px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-lg"
-          >
-            2026
-          </motion.div>
+
 
           {/* Large Editorial Headline */}
           <h1 className="text-[16vw] md:text-[14vw] leading-none font-editorial italic text-slate-900 tracking-tighter flex items-center justify-center">

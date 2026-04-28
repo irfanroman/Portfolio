@@ -746,7 +746,7 @@ const AboutCanvas = ({ journey, experience_projects, personal }) => {
 
           <div className="flex flex-col items-center max-w-3xl">
 
-            <h2 className="text-5xl md:text-6xl font-editorial italic text-slate-900 leading-[0.9] mb-8 tracking-tighter">
+            <h2 className="text-4xl md:text-6xl font-editorial italic text-slate-900 leading-[1.1] mb-8 tracking-tighter whitespace-normal md:whitespace-nowrap">
               Workspace <span className="text-cyan-600">Journey</span>
               <span className="relative">
                 <motion.svg
