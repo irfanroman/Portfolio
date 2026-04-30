@@ -5,6 +5,7 @@ import Hero from "./components/Hero";
 import AboutCanvas from "./components/AboutCanvas";
 import ProjectTimeline from "./components/ProjectTimeline";
 import ProjectsBento from "./components/ProjectsBento";
+import BehindDesigns from "./components/BehindDesigns";
 import Blog from "./components/Blog";
 import TechMarquee from "./components/TechMarquee";
 import Contact from "./components/Contact";
@@ -36,9 +37,12 @@ function App() {
             personal={data.personal}
           />
         </FadeIn>
-        <FadeIn>
+        {/* <FadeIn>
           <ProjectTimeline timeline={data.project_timeline} />
-        </FadeIn>
+        </FadeIn> */}
+        {/* <FadeIn>
+          <BehindDesigns projects={data.extended_projects} />
+        </FadeIn> */}
         <div id="projects">
           <FadeIn><ProjectsBento projects={data.projects} /></FadeIn>
         </div>
