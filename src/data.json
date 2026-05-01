@@ -18,7 +18,7 @@
       "commands": [
         {
           "input": "cat location.txt",
-          "output": "Semarang, Jawa Tengah 🌏"
+          "output": "Semarang, Jawa Tengah"
         },
         {
           "input": "cat skills.json | jq '.advanced'",
@@ -164,5 +164,43 @@
     { "date": "2024-06-05", "level": 3, "note": "Launched Personal Blog v1" },
     { "date": "2024-02-15", "level": 1, "note": "Started Learning Web Development" },
     { "date": "2023-10-10", "level": 2, "note": "Explored Graphic Design Basics" }
+  ],
+  "extended_projects": [
+    {
+      "id": 1,
+      "title": "Minimalist Packaging",
+      "category": "Brand Identity",
+      "image": "https://images.unsplash.com/photo-1589118949245-7d38baf380d6?q=80&w=1000"
+    },
+    {
+      "id": 2,
+      "title": "Eco-Friendly T-Shirt",
+      "category": "Product Design",
+      "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=1000"
+    },
+    {
+      "id": 3,
+      "title": "Dashboard Website",
+      "category": "Utilities",
+      "image": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?q=80&w=1000"
+    },
+    {
+      "id": 4,
+      "title": "AISBA School Website",
+      "category": "Fullstack Dev",
+      "image": "https://aisba.sch.id/frontend/assets/image/hero_bg.png"
+    },
+    {
+      "id": 5,
+      "title": "Fashion Editorial",
+      "category": "Photography",
+      "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000"
+    },
+    {
+      "id": 6,
+      "title": "Organic Juice Branding",
+      "category": "Brand Identity",
+      "image": "https://images.unsplash.com/photo-1622597467825-f82876fb954a?q=80&w=1000"
+    }
   ]
 }

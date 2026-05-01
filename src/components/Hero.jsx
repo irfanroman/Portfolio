@@ -15,8 +15,37 @@ const Hero = ({ personal }) => {
       aria-label="Hero" 
       className="relative h-screen w-full flex items-center justify-center overflow-hidden bg-white selection:bg-cyan-100"
     >
-      {/* Background Textures */}
+      {/* Background Textures & Technical Bits */}
       <div className="grain-overlay" />
+      <div className="absolute inset-0 bg-mesh-gradient opacity-30" />
+      
+      {/* Blueprint Grid */}
+      <div className="absolute inset-0 canvas-dot-grid opacity-[0.2]" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]" />
+      
+      {/* Floating Particles/Nodes */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {[...Array(12)].map((_, i) => (
+          <motion.div
+            key={i}
+            className="absolute w-px h-px bg-cyan-500 rounded-full"
+            initial={{ 
+              x: Math.random() * 100 + "%", 
+              y: Math.random() * 100 + "%",
+              opacity: 0 
+            }}
+            animate={{ 
+              y: [null, (Math.random() > 0.5 ? "-" : "+") + "20%"],
+              opacity: [0, 0.4, 0]
+            }}
+            transition={{ 
+              duration: Math.random() * 10 + 10, 
+              repeat: Infinity, 
+              ease: "linear" 
+            }}
+          />
+        ))}
+      </div>
       
       {/* Subtle Flow Lines (Background) */}
       <svg className="absolute inset-0 w-full h-full pointer-events-none opacity-[0.08]" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
@@ -74,6 +103,27 @@ const Hero = ({ personal }) => {
 
       {/* --- MAIN HEADLINE --- */}
       <div className="relative z-10 select-none">
+        {/* Focus Brackets around Headline */}
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.5, duration: 1.5 }}
+          className="absolute -inset-8 pointer-events-none border border-slate-100/50 rounded-2xl"
+        >
+          {/* Corner Accents */}
+          <div className="absolute -top-1 -left-1 w-4 h-4 border-t-2 border-l-2 border-cyan-500/30" />
+          <div className="absolute -top-1 -right-1 w-4 h-4 border-t-2 border-r-2 border-cyan-500/30" />
+          <div className="absolute -bottom-1 -left-1 w-4 h-4 border-b-2 border-l-2 border-cyan-500/30" />
+          <div className="absolute -bottom-1 -right-1 w-4 h-4 border-b-2 border-r-2 border-cyan-500/30" />
+          
+          {/* Scanning Line */}
+          <motion.div 
+            animate={{ top: ["0%", "100%", "0%"] }}
+            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+            className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/10 to-transparent z-0"
+          />
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, scale: 1.1, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
