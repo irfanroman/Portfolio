@@ -13,6 +13,7 @@
     "@fontsource/geist-mono": "^5.2.7",
     "@fontsource/outfit": "^5.2.8",
     "@fontsource/plus-jakarta-sans": "^5.2.8",
+    "@livechat/widget-react": "^1.4.0",
     "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
     "lucide-react": "^1.8.0",

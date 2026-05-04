@@ -1,4 +1,6 @@
 import React from "react";
+import { LiveChatWidget } from "@livechat/widget-react";
+
 import { motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
@@ -58,6 +60,7 @@ function App() {
       </main>
       <FadeIn><Footer /></FadeIn>
       <BackToTop />
+      <LiveChatWidget license="19697768" />
     </div>
   );
 }
